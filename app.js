@@ -6,10 +6,13 @@ const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-
+const shortid = require("shortid");
 const PORT = process.env.port || 3000;
 const app = express();
 
+shortid.characters(
+  "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@"
+);
 //view engine
 app.set("view engine", "ejs");
 
@@ -46,5 +49,8 @@ app.listen(PORT, () => {
 
 // home route
 app.get("/", (req, res) => {
+  //this is just a test of ShortID will need to remove
+  let something = shortid.generate();
+  console.log(something);
   res.render("home");
 });
