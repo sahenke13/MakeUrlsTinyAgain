@@ -26,18 +26,29 @@
         <h1>Make Urls Tiny Again</h1>
     </header>
     <main>
-        <div class="container" id="userInfo" data="<%=user.id%>">
-            <p>Welcome to your ShortUrls</p>
-        </div>
-        <div class="container">
+
+        <div class="jumbotron-fluid  my-3 p-5 border border-secondary rounded" id="formDiv" data="<%=user.id%>">
             <form>
                 <div class="form-group">
                     <span>
-                        <input type="url" class="form-control" placeholder="Enter Long URL" name="longURL" id="longURL">
+                        <input type="url" class="form-control border border-dark" placeholder="Enter Long URL" name="longURL"
+                            id="longURL">
                     </span>
                 </div>
-                <button type="button" class="btn btn-primary" id="submit">Submit</button>
+                <button type="button" class="btn btn-lg my-3" id="submit">Create URL</button>
             </form>
+        </div>
+        <div class="jumbotron-fluid" id="tableContainer">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Original URL</th>
+                        <th>Tiny URL</th>
+                        <th>Hit Count</th>
+                    </tr>
+                </thead>
+            </table>
+
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>

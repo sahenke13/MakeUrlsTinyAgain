@@ -1,7 +1,17 @@
+$(document).ready(() => {
+  let userId = $("#formDiv").attr("data");
+
+  $.ajax("/m/user/" + userId, {
+    type: "get"
+  }).then(data => {
+    console.log(data);
+  });
+});
+
 $(document).on("click", "#submit", () => {
   console.log("submit has been clicked");
   let longURL = $("#longURL").val();
-  let userID = $("#userInfo").attr("data");
+  let userID = $("#formDiv").attr("data");
   console.log("userID: ", userID);
   console.log("longURL is: ", longURL);
 

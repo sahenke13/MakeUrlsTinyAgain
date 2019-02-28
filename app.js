@@ -59,14 +59,18 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, () => {
 
 // home route
 app.get("/", (req, res) => {
-  //this is just a test of ShortID will need to remove
-  let something = shortid.generate();
-  console.log(something);
   res.render("home");
 });
 
-//app to get short URLs by user
-app.get("/m/user/:id", (req, res) => {});
+//route to get short URLs by user
+app.get("/m/user/:id", (req, res) => {
+  let user = req.params.id;
+
+  db.find({ user: req.params.id }).then(data =>
+    console.log("here are all your shortURLS: ", data)
+  );
+});
+
 app.get("/m", (req, res) => {});
 
 //route to get specific URL, then needs to redirect

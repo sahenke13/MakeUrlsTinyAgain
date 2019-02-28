@@ -1,6 +1,7 @@
 body {
     font-family: arial;
     margin: 0;
+    background: whitesmoke
 }
 
 nav {
@@ -35,6 +36,19 @@ header {
     margin: 30px auto;
     padding: 0 10px;
     color: #333;
+}
+
+#formDiv {
+    background: white;
+}
+
+#submit {
+    background: #ff5353;
+    color: white;
+}
+
+#tableContainer {
+    background: white
 }
 
 .google-btn {
