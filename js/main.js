@@ -34,18 +34,30 @@ $(document).ready(() => {
 });
 
 $(document).on("click", "#submit", () => {
-  let longURL = $("#longURL").val();
-  let userID = $("#formDiv").attr("data");
-  console.log("userID: ", userID);
-  console.log("longURL is: ", longURL);
+  if (
+    $("#longURL")
+      .get(0)
+      .checkValidity()
+  ) {
+    let longURL = $("#longURL").val();
+    let userID = $("#formDiv").attr("data");
+    console.log("userID: ", userID);
+    console.log("longURL is: ", longURL);
 
-  $.ajax("/m", {
-    type: "POST",
-    url: "/m",
-    data: { longURL: longURL, count: 0, user: userID }
-  }).then(data => {
-    console.log(data);
-  });
+    $.ajax("/m", {
+      type: "POST",
+      url: "/m",
+      data: { longURL: longURL, count: 0, user: userID }
+    }).then(data => {
+      console.log(data);
+    });
+
+    $("#longURL").val(" ");
+  } else {
+    alert("Invalid URL, please try again.");
+    $("#longURL").val(" ");
+    location.reload(true);
+  }
 
   $("#longURL").val(" ");
   location.reload(true);
