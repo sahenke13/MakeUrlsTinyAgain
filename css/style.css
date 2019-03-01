@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box
+}
+
 body {
     font-family: arial;
     margin: 0;
@@ -47,6 +51,15 @@ header {
     color: white;
 }
 
+#signInBtn {
+    background: #ff5353;
+    color: white;
+}
+
+#signUpBtn {
+    background: white;
+    color: darkblue
+}
 
 table {
     /* border-collapse: collapse; */
@@ -55,6 +68,17 @@ table {
     border-radius: 30px
 }
 
+.tinyFont {
+    font-size: 12px;
+}
+
+.signUpContainer {
+    width: 400px;
+    margin: auto;
+    background: white;
+    border: 1.5px solid grey;
+    border-radius: 5px;
+}
 
 th,
 td {

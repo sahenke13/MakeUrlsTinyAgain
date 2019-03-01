@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 shortid.characters(
   "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@"
 );
-//view engine
+// set view engine to ejs
 app.set("view engine", "ejs");
 
 app.use(
@@ -57,9 +57,17 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, () => {
   console.log("connected to mongodb");
 });
 
-// home route
+// html/ejs routes
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("signup");
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.get("/signup", (req, res) => {
+  res.render("signup");
 });
 
 //route to get short URLs by user
