@@ -1,6 +1,7 @@
 body {
     font-family: arial;
     margin: 0;
+    background: whitesmoke
 }
 
 nav {
@@ -31,11 +32,45 @@ nav a {
 
 main,
 header {
-    max-width: 960px;
+    max-width: 1080px;
     margin: 30px auto;
     padding: 0 10px;
     color: #333;
 }
+
+#formDiv {
+    background: white;
+}
+
+#submit {
+    background: #ff5353;
+    color: white;
+}
+
+
+table {
+    /* border-collapse: collapse; */
+    width: 100%;
+
+    border-radius: 30px
+}
+
+
+th,
+td {
+    border: .25px solid black;
+    border-radius: 5px;
+    padding: 15px;
+
+}
+
+/* .tableContainer {
+    table-layout: fixed;
+    background: white;
+    width: 100%;
+    height: 100%;
+    word-break: break-word;
+} */
 
 .google-btn {
     color: #fff;

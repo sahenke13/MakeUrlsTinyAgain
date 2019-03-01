@@ -59,18 +59,43 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, () => {
 
 // home route
 app.get("/", (req, res) => {
-  //this is just a test of ShortID will need to remove
-  let something = shortid.generate();
-  console.log(something);
   res.render("home");
 });
 
-//app to get short URLs by user
-app.get("/m/user/:id", (req, res) => {});
-app.get("/m", (req, res) => {});
+//route to get short URLs by user
+app.get("/m/user/:id", (req, res) => {
+  let user = req.params.id;
+  let data;
+  db.find({ user: req.params.id }).then(data => {
+    console.log("here are all your shortURLS: ", data);
+    res.json(data);
+  });
+});
+
+app.get("/m", (req, res) => {
+  db.find().then(data => res.json(data));
+});
 
 //route to get specific URL, then needs to redirect
-app.get("/m/:id", (req, res) => {});
+app.get("/m/:id", (req, res) => {
+  let tinyID = req.params.id;
+  let data;
+  console.log("tinyID is: ", tinyID);
+  db.find({ shortURL: "http://localhost:3000/m/" + tinyID }).then(data => {
+    console.log("newData is: ", data[0].longURL);
+    console.log("count: ", data[0].count);
+    let newCount = data[0].count;
+    newCount++;
+    console.log("newCount is: ", newCount);
+
+    db.findOneAndUpdate(
+      { shortURL: "http://localhost:3000/m/" + tinyID },
+      { count: newCount }
+    ).then(data => console.log("findOneAndUpdate: ", data));
+
+    res.redirect(data[0].longURL);
+  });
+});
 
 //route to post to API, and create Mongo Entry
 app.post("/m", (req, res) => {

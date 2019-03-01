@@ -23,22 +23,37 @@
         </ul>
     </nav>
     <header>
-        <h1>Make Urls Tiny Again</h1>
+        <h1>URLs</h1>
     </header>
     <main>
-        <div class="container" id="userInfo" data="<%=user.id%>">
-            <p>Welcome to your ShortUrls</p>
-        </div>
-        <div class="container">
+
+        <div class="jumbotron jumbotron-fluid  my-4 p-3 border border-secondary rounded" id="formDiv" data="<%=user.id%>">
             <form>
                 <div class="form-group">
                     <span>
-                        <input type="url" class="form-control" placeholder="Enter Long URL" name="longURL" id="longURL">
+                        <input type="url" class="form-control border border-dark my-2" pattern="https://.*" placeholder="Enter Long URL"
+                            name="longURL" id="longURL" required>
                     </span>
                 </div>
-                <button type="button" class="btn btn-primary" id="submit">Submit</button>
+                <button type="button" class="btn btn-lg my-2" id="submit">Create URL</button>
             </form>
         </div>
+        <div class="tableContainer border border-dark rounded p0 m0">
+            <table id="dynamicTable">
+                <thead>
+                    <tr>
+                        <th>Original URL</th>
+                        <th>Tiny URL</th>
+                        <th>Hit Count</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+
+
+
     </main>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
