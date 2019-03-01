@@ -4,12 +4,36 @@ $(document).ready(() => {
   $.ajax("/m/user/" + userId, {
     type: "get"
   }).then(data => {
-    console.log(data);
+    console.log("data is: ", data);
+
+    for (let i in data) {
+      let tableRow = $("<tr>");
+      let tableData1 = $("<td>");
+      let tableData2 = $("<td>");
+      let tableData3 = $("<td>");
+      let tinyURL = $("<a>");
+      tinyURL.attr("href", data[i].shortURL);
+      tinyURL.text(data[i].shortURL);
+
+      let orgURL = data[i].longURL;
+
+      let count = data[i].count;
+
+      let orgURLData = tableData1.append(orgURL);
+      let tinyURLData = tableData2.append(tinyURL);
+      let countData = tableData3.append(count);
+
+      tableRow.append(orgURLData);
+      tableRow.append(tinyURLData);
+      tableRow.append(countData);
+
+      $("#dynamicTable").append(tableRow);
+      console.log("dynamic data: ", orgURL, tinyURL, count);
+    }
   });
 });
 
 $(document).on("click", "#submit", () => {
-  console.log("submit has been clicked");
   let longURL = $("#longURL").val();
   let userID = $("#formDiv").attr("data");
   console.log("userID: ", userID);
@@ -24,4 +48,5 @@ $(document).on("click", "#submit", () => {
   });
 
   $("#longURL").val(" ");
+  location.reload(true);
 });
