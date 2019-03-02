@@ -10,14 +10,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/main.js"></script>
     <title>Make Urls Tiny Again</title>
 
 </head>
 
-
 <body>
-
-
     <main>
 
         <div class="container">
@@ -28,17 +27,16 @@
                     <form>
                         <label for="email" class="align-right">Email</label>
                         <input type="email" class="form-control border border-dark mb-3" placeholder="Enter your email"
-                            name="userName " id="userName" required>
+                            name="logInUser " id="logInUser" required>
                         <label for="Password" class="align-right">Password</span></label>
                         <input type="text" class="form-control border border-dark " placeholder="Enter your password"
-                            name="password" id="password" required>
-                        <button type="button" id="signInBtn" class="btn btn-lg btn-block mt-4 mb-3">Sign In</button>
-                        <a href="/signup"><button type="button" class="btn btn-lg btn-block my-3" id="signUpBtn">Sign
-                                Up</button></a>
-
-
+                            name="password" id="logInPassword" required>
+                        <button type="button" id="logIn" class="btn btn-lg btn-block mt-4 mb-3 coloredBtn">Sign In</button>
 
                     </form>
+                    <a href="/"><button class="btn btn-lg btn-block my-3 noColorBtn">Sign
+                            Up</button></a>
+
                 </div>
 
             </div>

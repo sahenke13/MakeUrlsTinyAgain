@@ -1,16 +1,11 @@
 const express = require("express");
-const authRoutes = require("./routes/authRoutes");
-const shortUrlRoute = require("./routes/shortUrlRoutes");
-const passportSetup = require("./config/passportSetup");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const keys = require("./config/keys");
-const cookieSession = require("cookie-session");
-const passport = require("passport");
 const shortid = require("shortid");
 
-//bring in shortURL db
-const db = require("./models/shortUrl");
+//bring in shortURL db and User db and possible current User db
+const shortURLdb = require("./models/shortUrl");
+const userdb = require("./models/user");
 
 const PORT = process.env.port || 3000;
 
@@ -20,6 +15,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname + "/"));
+
 //remove blank space from shortid
 shortid.characters(
   "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@"
@@ -27,26 +24,12 @@ shortid.characters(
 // set view engine to ejs
 app.set("view engine", "ejs");
 
-app.use(
-  cookieSession({
-    maxAge: 1 * 60 * 60 * 1000,
-    keys: [keys.session.cookieKey]
-  })
-);
-
-//initial passport
-app.use(passport.initialize());
-app.use(passport.session());
+//serve up static routes
 
 // app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//serve up static routes
-app.use(express.static(__dirname + "/"));
-
 //routes
-app.use("/auth", authRoutes);
-app.use("/shortUrl", shortUrlRoute);
 
 //bring in dotenv to hide sensitive information
 require("dotenv").load();
@@ -66,22 +49,36 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
-app.get("/signup", (req, res) => {
-  res.render("signup");
+app.post("/m/user", (req, res) => {
+  console.log("creating a user here :", req.body);
+  let email = req.body.email;
+  let password = req.body.password;
+  let userObj = { email: email, password: password };
+  userdb.create(userObj).then(data => {
+    console.log(data);
+  });
+  // res.render("/login");
 });
-
 //route to get short URLs by user
 app.get("/m/user/:id", (req, res) => {
   let user = req.params.id;
   let data;
-  db.find({ user: req.params.id }).then(data => {
+  shortURLdb.find({ user: req.params.id }).then(data => {
     console.log("here are all your shortURLS: ", data);
     res.json(data);
   });
 });
+//route to get all users and to see if they already exist.
+app.get("/m/user", (req, res) => {
+  //grab users and compare to user by email being created in main.js
 
+  userdb.find().then(data => res.json(data));
+});
+
+//route to get all shortURLs
 app.get("/m", (req, res) => {
   db.find().then(data => res.json(data));
+  res.render("shortUrl");
 });
 
 //route to get specific URL, then needs to redirect
@@ -89,20 +86,24 @@ app.get("/m/:id", (req, res) => {
   let tinyID = req.params.id;
   let data;
   console.log("tinyID is: ", tinyID);
-  db.find({ shortURL: "http://localhost:3000/m/" + tinyID }).then(data => {
-    console.log("newData is: ", data[0].longURL);
-    console.log("count: ", data[0].count);
-    let newCount = data[0].count;
-    newCount++;
-    console.log("newCount is: ", newCount);
+  shortURLdb
+    .find({ shortURL: "http://localhost:3000/m/" + tinyID })
+    .then(data => {
+      console.log("newData is: ", data[0].longURL);
+      console.log("count: ", data[0].count);
+      let newCount = data[0].count;
+      newCount++;
+      console.log("newCount is: ", newCount);
 
-    db.findOneAndUpdate(
-      { shortURL: "http://localhost:3000/m/" + tinyID },
-      { count: newCount }
-    ).then(data => console.log("findOneAndUpdate: ", data));
+      shortURLdb
+        .findOneAndUpdate(
+          { shortURL: "http://localhost:3000/m/" + tinyID },
+          { count: newCount }
+        )
+        .then(data => console.log("findOneAndUpdate: ", data));
 
-    res.redirect(data[0].longURL);
-  });
+      res.redirect(data[0].longURL);
+    });
 });
 
 //route to post to API, and create Mongo Entry
@@ -120,7 +121,7 @@ app.post("/m", (req, res) => {
     shortURL: shortURL
   };
   //create mongo entry
-  db.create(dataObj).then(data => {
+  shortURLdb.create(dataObj).then(data => {
     console.log(data);
   });
 });

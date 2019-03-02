@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/main.js"></script>
     <title>Login</title>
 </head>
 
@@ -30,16 +32,14 @@
                             </span></label>
                         <input type="text" class="form-control border border-dark mb-4" placeholder="Enter your password"
                             name="password" id="password" required>
-                        <label for="ConfirmPasswor" class="align-right">Confirm Password</label>
+                        <label for="confirmPassword" class="align-right">Confirm Password</label>
                         <input type="text" class="form-control border border-dark " placeholder="Enter your password"
-                            name="password" id="password" required>
-                        <button type="button" id="signInBtn" class="btn btn-lg btn-block mt-4 mb-3">Sign Up</button>
-                        <a href="/login"><button type="button" class="btn btn-lg btn-block my-3" id="signUpBtn">Sign
-                                In</button></a>
-
-
+                            name="password" id="confirmPassword" required>
+                        <button type="submit" id="signup" class="btn btn-lg btn-block mt-4 mb-3 coloredBtn">Sign Up</button>
 
                     </form>
+                    <a href="/login"><button class="btn btn-lg btn-block my-3 noColorBtn" id="signin">Sign
+                            In</button></a>
                 </div>
 
             </div>

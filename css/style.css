@@ -51,12 +51,12 @@ header {
     color: white;
 }
 
-#signInBtn {
+.coloredBtn {
     background: #ff5353;
     color: white;
 }
 
-#signUpBtn {
+.noColorBtn {
     background: white;
     color: darkblue
 }

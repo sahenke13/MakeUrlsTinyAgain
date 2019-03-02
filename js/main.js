@@ -1,3 +1,5 @@
+const userdb = "./models/users";
+
 $(document).ready(() => {
   let userId = $("#formDiv").attr("data");
 
@@ -61,4 +63,46 @@ $(document).on("click", "#submit", () => {
 
   $("#longURL").val(" ");
   location.reload(true);
+});
+
+//On Click function for Signing Up a new User
+$(document).on("click", "#signup", e => {
+  e.preventDefault();
+  let userName = $("#userName").val();
+  let password = $("#password").val();
+  let confPassword = $("#confirmPassword").val();
+  if (
+    password === confPassword &&
+    $("#userName")
+      .get(0)
+      .checkValidity()
+  ) {
+    //make ajax post to create new User in DB.
+
+    $.ajax("/m/user", {
+      type: "POST",
+      url: "/m/user",
+      data: { email: userName, password: password }
+    });
+    window.location = "/login";
+  } else {
+    alert(
+      "Please check that your email is valid and that your passwords match"
+    );
+  }
+});
+
+// need to get signin information
+$(document).on("click", "#logIn", e => {
+  e.preventDefault();
+  let userName = $("#logInUser").val();
+  let password = $("#logInPassword").val();
+
+  $.ajax("/m/user/", {
+    type: "get"
+  }).then(data => {
+    //this is working, now need to check if password and email match, if not send up alert and clear from.
+    data.forEach(el => console.log("el is : ", el.email));
+  });
+  console.log("UserName is " + userName + "password is " + password);
 });
