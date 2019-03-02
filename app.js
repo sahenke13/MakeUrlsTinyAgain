@@ -6,6 +6,7 @@ const shortid = require("shortid");
 //bring in shortURL db and User db and possible current User db
 const shortURLdb = require("./models/shortUrl");
 const userdb = require("./models/user");
+const curUserdb = require("./models/curUser");
 
 const PORT = process.env.port || 3000;
 
@@ -62,9 +63,24 @@ app.post("/m/user", (req, res) => {
   userdb.create(userObj).then(data => {
     console.log(data);
   });
-  // res.render("/login");
+});
+
+//create a post route to set curUser
+app.post("/m/curUser", (req, res) => {
+  console.log("the curUser route got hit");
+  console.log("req.body: ", req.body.curUser);
+  curUserdb.create({ currentUser: req.body.curUser }).then(() => {
+    console.log("current user created");
+  });
+});
+//route to get current User.
+app.get("/m/curUser/", (req, res) => {
+  console.log("CurUser GET route hit");
+
+  curUserdb.find().then(data => res.json(data));
 });
 //data route to get short URLs by user
+
 app.get("/m/user/:id", (req, res) => {
   console.log("route is being hit");
   let user = req.params.id;
@@ -72,8 +88,8 @@ app.get("/m/user/:id", (req, res) => {
   let data;
   shortURLdb.find({ user: req.params.id }).then(data => {
     console.log("here are all your shortURLS: ", data);
+    res.json(data);
   });
-  res.render("shortUrl");
 });
 //route to get all users and to see if they already exist.
 app.get("/m/user", (req, res) => {
@@ -119,6 +135,8 @@ app.post("/m", (req, res) => {
   let longURL = req.body.longURL;
   let count = req.body.count;
   let shortURL = "http://localhost:3000/m/" + shortid.generate();
+
+  console.log("user is in user post route: ", user);
 
   //create dataObj to pass to Mongo
   let dataObj = {

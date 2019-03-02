@@ -44,6 +44,11 @@ $(document).on("click", "#logIn", e => {
 
     if (curUser && password === curUser.password) {
       console.log("It's time to rock and roll baby");
+      // hit route to set CurUser
+      $.ajax("/m/curUser", {
+        type: "POST",
+        data: { curUser: curUser._id }
+      });
       window.location = "/shortUrl";
     } else {
       alert("Authenication Failed!! Your Email and/or Password is incorrect");
