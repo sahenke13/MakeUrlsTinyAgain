@@ -16,18 +16,22 @@
 <script src="../js/shortUrl.js"></script>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="/logout">Logout</a></li>
-            <!-- <li><a href="/">Homepage</a></li> -->
-        </ul>
-    </nav>
-    <header>
-        <h1>URLs</h1>
-    </header>
-    <main>
 
-        <div class="jumbotron jumbotron-fluid  my-4 p-3 border border-secondary rounded" id="formDiv">
+    <header>
+
+    </header>
+
+
+
+
+    <main>
+        <div class="container">
+
+            <h1 class="float-left">URLs </h1>
+            <span class="float-right">logout</span>
+        </div>
+
+        <div class="jumbotron   my-3 p-4 border border-secondary rounded" id="formDiv">
             <form novalidate>
                 <div class="form-group">
                     <span>
@@ -38,7 +42,7 @@
                 <button type="button" class="btn btn-lg my-2" id="submit">Create URL</button>
             </form>
         </div>
-        <div class="tableContainer border border-dark rounded p0 m0">
+        <div>
             <table id="dynamicTable">
                 <thead>
                     <tr>

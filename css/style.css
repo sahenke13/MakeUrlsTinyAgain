@@ -34,6 +34,15 @@ nav a {
     display: block;
 }
 
+.btmButton {
+    position: relative;
+    bottom: -50px;
+    font-size: 1rem;
+
+}
+
+.topButton {}
+
 main,
 header {
     max-width: 1080px;
@@ -44,15 +53,33 @@ header {
 
 #formDiv {
     background: white;
+    position: relative;
+    top: 120px;
+    height: 175px;
 }
 
 #submit {
-    background: #ff5353;
+    background: #f35555;
     color: white;
+    position: relative;
+    top: -20px;
+    width: 200px;
 }
 
+#dynamicTable {
+    position: relative;
+    top: 140px
+}
+
+#longURL {
+    position: relative;
+    top: -25px
+}
+
+
+
 .coloredBtn {
-    background: #ff5353;
+    background: #f35555;
     color: white;
 }
 
@@ -68,8 +95,23 @@ table {
     border-radius: 30px
 }
 
+a {
+    color: inherit
+}
+
 .tinyFont {
     font-size: 12px;
+}
+
+.signInContainer {
+    width: 400px;
+    margin: auto;
+    background: white;
+    border: 1.5px solid grey;
+    border-radius: 5px;
+    position: relative;
+    top: 90px;
+    height: 450px
 }
 
 .signUpContainer {
@@ -78,6 +120,9 @@ table {
     background: white;
     border: 1.5px solid grey;
     border-radius: 5px;
+    position: relative;
+    top: 110px;
+    height: 550px
 }
 
 th,
@@ -95,11 +140,3 @@ td {
     height: 100%;
     word-break: break-word;
 } */
-
-.google-btn {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px;
-    background: #ff5353;
-}
