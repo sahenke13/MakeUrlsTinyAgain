@@ -101,8 +101,12 @@ $(document).on("click", "#logIn", e => {
   $.ajax("/m/user/", {
     type: "get"
   }).then(data => {
-    //this is working, now need to check if password and email match, if not send up alert and clear from.
-    data.forEach(el => console.log("el is : ", el.email));
+    //this is working, now need to check if password and email match if so, make currentUser, and reroute to shortURLs, if not send up alert and clear from.
+    let curUser = data.find(el => {
+      console.log("userName: ", el.email);
+      return el.email === userName;
+    });
+    console.log("curUser: ", curUser);
   });
   console.log("UserName is " + userName + "password is " + password);
 });
