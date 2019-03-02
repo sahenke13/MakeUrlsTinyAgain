@@ -49,6 +49,11 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
+app.get("/shortUrl", (req, res) => {
+  console.log("route has been hit, the shortURL route that is");
+  res.render("shortUrl");
+});
+
 app.post("/m/user", (req, res) => {
   console.log("creating a user here :", req.body);
   let email = req.body.email;
@@ -59,14 +64,16 @@ app.post("/m/user", (req, res) => {
   });
   // res.render("/login");
 });
-//route to get short URLs by user
+//data route to get short URLs by user
 app.get("/m/user/:id", (req, res) => {
+  console.log("route is being hit");
   let user = req.params.id;
+  console.log(user);
   let data;
   shortURLdb.find({ user: req.params.id }).then(data => {
     console.log("here are all your shortURLS: ", data);
-    res.json(data);
   });
+  res.render("shortUrl");
 });
 //route to get all users and to see if they already exist.
 app.get("/m/user", (req, res) => {
