@@ -79,6 +79,13 @@ app.get("/m/curUser/", (req, res) => {
 
   curUserdb.find().then(data => res.json(data));
 });
+
+// route to delete current user
+
+app.delete("/m/curUser/", (req, res) => {
+  console.log("delete user has been clicked");
+  curUserdb.deleteMany().then(data => console.log("delete data: ", data));
+});
 //data route to get short URLs by user
 
 app.get("/m/user/:id", (req, res) => {

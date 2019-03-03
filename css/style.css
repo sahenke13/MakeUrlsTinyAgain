@@ -61,6 +61,7 @@ td {
 #logout {
     position: relative;
     top: 30px;
+    cursor: pointer;
 }
 
 

@@ -30,6 +30,7 @@ $(document).on("click", "#logIn", e => {
   e.preventDefault();
   let userName = $("#logInUser").val();
   let password = $("#logInPassword").val();
+  console.log("userName: ", userName);
 
   $.ajax("/m/user/", {
     type: "GET"
@@ -37,6 +38,7 @@ $(document).on("click", "#logIn", e => {
     //this is working, now need to check if password and email match if so, make currentUser, and reroute to shortURLs, if not send up alert and clear from.
     let curUser = data.find(el => {
       console.log("userName: ", el.email);
+      console.log("id is :", el._id);
       return el.email === userName;
     });
 
@@ -56,4 +58,12 @@ $(document).on("click", "#logIn", e => {
       //add a page reload.
     }
   });
+});
+
+$(document).on("click", "#logout", () => {
+  console.log("logout has been clicked");
+  $.ajax("/m/curUser", {
+    type: "DELETE"
+  });
+  window.location = "/login";
 });
